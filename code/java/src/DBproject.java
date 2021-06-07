@@ -298,12 +298,128 @@ public class DBproject{
 	}//end readChoice
 
 	public static void AddDoctor(DBproject esql) {//1
+		try{
+			String query = "insert into Doctor (doctor_ID, name, specialty, did) values (";
+			
+			System.out.print("\tEnter Doctor ID: ");
+			String id = in.readLine();
+			query += id; //gets the doctor ID
+			
+			System.out.print("\tEnter Doctor name: ");
+			String doc_name = in.readLine();
+			query += ", '";
+			query += doc_name; //gets the doctor name
+			query += "', "; //query added as: , 'doc_name',
+
+			System.out.print("\tEnter Doctor specialty: ");
+			String doc_spec = in.readLine();
+			query += "'";
+			query += doc_spec; //gets the doctor specailty
+			query += "', "; //query added as: 'doc_spec', 
+
+			System.out.print("\tEnter Doctor Department ID: ");
+			String doc_did = in.readLine();
+			query += doc_did; //gets the doctor department id
+			query += ")"; //need closing parenthases here
+   
+			int rowCount = esql.executeQuery(query);
+			System.out.println ("total row(s): " + rowCount);
+		 }
+		 catch(Exception e){
+			System.err.println (e.getMessage());
+		 }
 	}
 
 	public static void AddPatient(DBproject esql) {//2
+		try{
+			String query = "insert into Patient (patient_ID, name, gtype, age, address, number_of_appts) values (";
+
+			System.out.print("\tEnter Patient ID: ");
+			String id = in.readLine();
+			query += id; 
+			
+			System.out.print("\tEnter Patient name: ");
+			String pat_name = in.readLine();
+			query += ", '";
+			query += pat_name; 
+			query += "', "; //query added as: , 'pat_name',
+
+			System.out.print("\tEnter Patient gender: "); //looks like it either takes 'M' or 'F' soooo 2 genders??????????????
+			String pat_gender = in.readLine();
+			query += "'";
+			query += pat_gender; 
+			query += "', "; //query added as: 'pat_gender',
+
+			System.out.print("\tEnter Patient age: ");
+			String age = in.readLine();
+			query += age; 
+
+			System.out.print("\tEnter Patient address: ");
+			String pat_address = in.readLine();
+			query += ", '";
+			query += pat_address; 
+			query += "', "; //query added as: , 'pat_address',
+
+			System.out.print("\tEnter Patient age: ");
+			String num_appts = in.readLine();
+			query += num_appts; 
+			query += ")"; //need closing parenthases here
+
+
+			int rowCount = esql.executeQuery(query);
+			System.out.println ("total row(s): " + rowCount);
+		}
+		catch(Exception e){
+			System.err.println (e.getMessage());
+		 }
 	}
 
 	public static void AddAppointment(DBproject esql) {//3
+		try{
+			String query  = "insert into Appointment (appnt_ID, adate, time_slot, status) values (";
+			
+			System.out.print("\tEnter Appointment ID: ");
+			String id = in.readLine();
+			query += id; 
+
+			System.out.print("\tEnter Appointment month: ");
+			String appt_m = in.readLine();
+			query += ", '";
+			query += appt_m; 
+			query += "/"; //query added as: , 'appt_m/
+
+			System.out.print("\tEnter Appointment day: ");
+			String appt_d = in.readLine();
+			query += appt_d; 
+			query += "/"; //query added as: appt_d/
+
+			System.out.print("\tEnter Appointment year: ");
+			String appt_y = in.readLine();
+			query += appt_y; 
+			query += "', "; //query added as: appt_y', 
+
+			System.out.print("\tEnter Appointment starting time in this format 'hour:minutes' (ie. 8:00 or 14:30): ");
+			String appt_startTime = in.readLine();
+			query += "'";
+			query += appt_startTime; 
+			query += "-"; //query added as: 'appt_startTIme-
+
+			System.out.print("\tEnter Appointment ending time in this format 'hour:minutes' (ie. 8:00 or 14:30): ");
+			String appt_endTime = in.readLine();
+			query += appt_endTime; 
+			query += "', "; //query added as: appt_endTime', 
+
+			System.out.print("\tEnter Appointment status: ");
+			String appt_status = in.readLine();
+			query += "'";
+			query += appt_status; 
+			query += "')"; //query added as: 'appt_status') with ending parenthases
+
+		}
+		catch(Exception e){
+			System.err.println (e.getMessage());
+		 }
+
 	}
 
 
