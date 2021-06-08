@@ -415,6 +415,9 @@ public class DBproject{
 			query += appt_status; 
 			query += "')"; //query added as: 'appt_status') with ending parenthases
 
+			int rowCount = esql.executeQuery(query);
+			System.out.println ("total row(s): " + rowCount);
+
 		}
 		catch(Exception e){
 			System.err.println (e.getMessage());
@@ -433,6 +436,30 @@ public class DBproject{
 
 	public static void ListAvailableAppointmentsOfDepartment(DBproject esql) {//6
 		// For a department name and a specific date, find the list of available appointments of the department
+		try{ //okay this is how it connects: Department -> Doctor id thoruhg request maint -> appt id through has appointment -> appointment outputs ids for all availble that match the date 
+			String query = " select A.appnt_ID from Appointment A, Department D, request_maintenance R, has_appointment H where R.dept_name = ";
+			
+			System.out.print("\tEnter Department name: ");
+			String dname = in.readLine();
+			query += "'";
+			query += dname; 
+			query += "'";
+
+			query += "and R.did = H.doctor_id and H.appt_id = A.appnt_ID and A.status = 'AV' and A.adate = ";
+
+			System.out.print("\tEnter a date in this format: month/day/year (3/10/2021 or 11/5/2020): ");
+			String dateStr = in.readLine();
+			query += "'";
+			query += dateStr;
+			query += "'";
+			
+
+			int rowCount = esql.executeQuery(query);
+			System.out.println ("total row(s): " + rowCount);
+		}
+		catch(Exception e){
+			System.err.println (e.getMessage());
+		}
 	}
 
 	public static void ListStatusNumberOfAppointmentsPerDoctor(DBproject esql) {//7
@@ -442,5 +469,21 @@ public class DBproject{
 	
 	public static void FindPatientsCountWithStatus(DBproject esql) {//8
 		// Find how many patients per doctor there are with a given status (i.e. PA, AC, AV, WL) and list that number per doctor.
+		try{
+			String query = "select D.name, count(A.status) from Appointment A, Doctor D, has_appointment H where A.appnt_ID = H.appt_id and H.doctor_id = D.doctor_ID and A.status = " ;
+
+			System.out.print("\tEnter Appointment status: ");
+			String statass = in.readLine();
+			query += "'";
+			query += statass; 
+			query += "'";
+			query += " group by D.name";
+
+			int rowCount = esql.executeQuery(query);
+			System.out.println ("total row(s): " + rowCount);
+		}
+		catch(Exception e){
+			System.err.println (e.getMessage());
+		}
 	}
 }
