@@ -322,7 +322,7 @@ public class DBproject{
 			query += doc_did; //gets the doctor department id
 			query += ")"; //need closing parenthases here
    
-			int rowCount = esql.executeQuery(query);
+			int rowCount = esql.executeUpdate(query);
 			System.out.println ("total row(s): " + rowCount);
 		 }
 		 catch(Exception e){
@@ -428,6 +428,63 @@ public class DBproject{
 
 	public static void MakeAppointment(DBproject esql) {//4
 		// Given a patient, a doctor and an appointment of the doctor that s/he wants to take, add an appointment to the DB
+		try{
+			String query  = "if exists(select * from Doctor D, Appointment A, has_appointment H where D.doctor_ID = ";
+
+			System.out.print("\tWe will take in the doctor's id: ");
+			String doc_id = in.readLine();
+			query += doc_id;
+
+			query += " and D.doctor_ID = H.doctor_id and H.appt_id = ";
+
+			System.out.print("\tNow we will take in the appointment id: ");
+			String appointment_id = in.readLine();
+			query += appointment_id;
+
+			query += " and A.status = 'AV') begin insert into Patient (patient_ID, name, gtype, age, address, number_of_appts) values (";
+
+			System.out.println("\tWe will now take in your patient info :)");
+			
+			System.out.print("\tEnter Patient ID: ");
+			String id = in.readLine();
+			query += id; 
+			
+			System.out.print("\tEnter Patient name: ");
+			String pat_name = in.readLine();
+			query += ", '";
+			query += pat_name; 
+			query += "', "; //query added as: , 'pat_name',
+
+			System.out.print("\tEnter Patient gender: "); //looks like it either takes 'M' or 'F' soooo 2 genders??????????????
+			String pat_gender = in.readLine();
+			query += "'";
+			query += pat_gender; 
+			query += "', "; //query added as: 'pat_gender',
+
+			System.out.print("\tEnter Patient age: ");
+			String age = in.readLine();
+			query += age; 
+
+			System.out.print("\tEnter Patient address: ");
+			String pat_address = in.readLine();
+			query += ", '";
+			query += pat_address; 
+			query += "', "; //query added as: , 'pat_address',
+
+			System.out.print("\tEnter Patient age: ");
+			String num_appts = in.readLine();
+			query += num_appts; 
+			query += ")"; //need closing parenthases here
+
+			
+
+			int rowCount = esql.executeQuery(query);
+			System.out.println ("total row(s): " + rowCount);
+
+		}
+		catch(Exception e){
+			System.err.println (e.getMessage());
+		 }
 	}
 
 	public static void ListAppointmentsOfDoctor(DBproject esql) {//5

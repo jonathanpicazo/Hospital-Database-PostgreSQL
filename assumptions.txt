@@ -1,0 +1,13 @@
+Just to confirm, this is what I understand for #4:
+
+User enters a patient - it is either inserted or updated depending on if it exists.
+
+User enters a doctor - must exist
+
+User enters an appointment - must exist
+
+ Mehnaz Tabassum Mahin 1 day ago Yes, doctor and appointment must exist, and then you can insert/update patient.
+
+
+
+ For any update like statements, you should call executeUpdate method instead of executeQuery method. You can find the hints which method is the correct one to use as comments in the java file.
