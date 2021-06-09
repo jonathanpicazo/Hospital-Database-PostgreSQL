@@ -432,6 +432,34 @@ public class DBproject{
 
 	public static void ListAppointmentsOfDoctor(DBproject esql) {//5
 		// For a doctor ID and a date range, find the list of active and available appointments of the doctor
+		//https://stackoverflow.com/questions/14208958/select-data-from-date-range-between-two-dates
+		//so after seeing this stack overflow website i am now thinking that dates are not strings which means some of my insert into statments would be wrong but should be an easy fix
+		try {
+			String query  = "select A.appnt_ID from Appointment A, Doctor D has_appointment H where H.doctor_id = ";
+
+
+			System.out.print("\tEnter Doctor ID: ");
+			String doc_ID = in.readLine();
+			query += doc_ID; 
+
+			query += " and H.appt_id = A.appnt_ID and (A.status = 'AC' or A.status = 'AV') and A.adate > ";
+
+			System.out.print("\tEnter a left bound date in this format: month/day/year (3/10/2021 or 11/5/2020): ");
+			String dateStr = in.readLine();
+			query += dateStr;
+
+			query += " and A.adate < ";
+
+			System.out.print("\tEnter a right bound date in this format: month/day/year (3/10/2021 or 11/5/2020): ");
+			String dateStr2 = in.readLine();
+			query += dateStr2;
+
+			int rowCount = esql.executeQuery(query);
+			System.out.println ("total row(s): " + rowCount);
+		}
+		catch(Exception e){
+			System.err.println (e.getMessage());
+		 }
 	}
 
 	public static void ListAvailableAppointmentsOfDepartment(DBproject esql) {//6
@@ -464,6 +492,13 @@ public class DBproject{
 
 	public static void ListStatusNumberOfAppointmentsPerDoctor(DBproject esql) {//7
 		// Count number of different types of appointments per doctors and list them in descending order
+		//asuming that the user enteres a doctors name or something 
+		try{
+
+		}
+		catch(Exception e){
+			System.err.println (e.getMessage());
+		}
 	}
 
 	
