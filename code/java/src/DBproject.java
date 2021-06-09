@@ -492,10 +492,16 @@ public class DBproject{
 
 	public static void ListStatusNumberOfAppointmentsPerDoctor(DBproject esql) {//7
 		// Count number of different types of appointments per doctors and list them in descending order
-		//asuming that the user enteres a doctors name or something 
+		//asuming this one has no user input
+		//just lists the doctors in descedning order based on how many appointments they have with all types of appointments
 		try{
+			//this link for help:https://learnsql.com/cookbook/how-to-order-by-count-in-sql/#:~:text=The%20first%20step%20is%20to,IDs%20with%20COUNT(id)%20.
+			String query  = "select count(*) from Doctor D, Appointment A, has_appointment H where D.doctor_ID = H.doctor_id and H.appt_id = A.appnt_ID group by A.status order by count(*) desc";
+			//may want count(A.status) here
 
-		}
+			int rowCount = esql.executeQuery(query);
+			System.out.println ("total row(s): " + rowCount);	
+		}		
 		catch(Exception e){
 			System.err.println (e.getMessage());
 		}
