@@ -2,12 +2,34 @@ Just to confirm, this is what I understand for #4:
 
 User enters a patient - it is either inserted or updated depending on if it exists.
 
-User enters a doctor - must exist
+ASSUMPTIONS I MADE:
 
-User enters an appointment - must exist
+1)	No assumptions here since we just have to insert values into the doctor table
+    a.	If the doctor id is entered as an empty value or a value that is already in the table then an error is thrown
+    b.	Uses execute update 
+2)	No assumptions like in the 1st query
+3)	Same as first and second query 
+4)	Okay so this problem was a wild ride and I hated it. I attempted to use a if exists then do this statement and the compiler was not having it. But, I think my logic was good.
+    a.	I assumed that we check to see if the doctor and appointment exist and that the appointment status is AV.
+    b.	If that checks to be true then we can insert the patient into the patient database
+5)	So I assume that we take in doctor ID and a date range from the user
+    a.	We then just check if that doctor has any AV or AC appointments within the date range that the user inputted. 
+    b.	Honestly, hard to find appointments that were AV or AC but it was testable still
+6)	This one was even harder to test since finding AV appointments was so rare and I had to check to make sure the date was working 
+    a.	Connected all of this from department -> doctor -> request maintenance -> has appointment -> appointment
+    b.	Kind of a wild query but it works
+7)	So I assumed that there was no user input for this
+    a.	This one was a little too open ended honestly
+    b.	I just output the doctors and how many of each appointment they have but I rank this by the largest number of appointments
+    c.	For example, Kent Cole has 2 PA appointments and 1 AV appointment so he shows up at the top of the list for the 2 PAs and shows up again in the middle for the 1 AV
+8)	So this one matches the previous query but in this case we just ask the user to enter the appointment status and output the doctors who have appointments of that status 
+    a.	Not a hard one really
 
- Mehnaz Tabassum Mahin 1 day ago Yes, doctor and appointment must exist, and then you can insert/update patient.
+COMMMENTS:
+1)	I ran into some errors with the date type but got over that reasonably easily
+2)	I didn’t realize there were different types of ways of running the query like executeQuery, executeQueryAndReturnResult or executeUpdate.
+3)	I don’t know some of those queries had me searching for a little for a valid input that would return something (especially query 6)
 
 
-
- For any update like statements, you should call executeUpdate method instead of executeQuery method. You can find the hints which method is the correct one to use as comments in the java file.
+CONTRIBUTIONS:
+We split the work 50/50

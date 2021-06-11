@@ -322,8 +322,10 @@ public class DBproject{
 			query += doc_did; //gets the doctor department id
 			query += ")"; //need closing parenthases here
    
-			int rowCount = esql.executeQuery(query);
-			System.out.println ("total row(s): " + rowCount);
+			//int rowCount = esql.executeQuery(query); 
+			esql.executeUpdate(query);
+			System.out.println ("ADDED VALUES");
+			//System.out.println ("total row(s): " + rowCount);
 		 }
 		 catch(Exception e){
 			System.err.println (e.getMessage());
@@ -360,14 +362,16 @@ public class DBproject{
 			query += pat_address; 
 			query += "', "; //query added as: , 'pat_address',
 
-			System.out.print("\tEnter Patient age: ");
+			System.out.print("\tEnter number of appointments for the Patient: ");
 			String num_appts = in.readLine();
 			query += num_appts; 
 			query += ")"; //need closing parenthases here
 
 
-			int rowCount = esql.executeQuery(query);
-			System.out.println ("total row(s): " + rowCount);
+			//int rowCount = esql.executeQuery(query);
+			esql.executeUpdate(query);
+			System.out.println ("ADDED VALUES");
+			//System.out.println ("total row(s): " + rowCount);
 		}
 		catch(Exception e){
 			System.err.println (e.getMessage());
@@ -415,8 +419,10 @@ public class DBproject{
 			query += appt_status; 
 			query += "')"; //query added as: 'appt_status') with ending parenthases
 
-			int rowCount = esql.executeQuery(query);
-			System.out.println ("total row(s): " + rowCount);
+			//int rowCount = esql.executeQuery(query);
+			esql.executeUpdate(query);
+			System.out.println ("ADDED VALUES");
+			//System.out.println ("total row(s): " + rowCount);
 
 		}
 		catch(Exception e){
@@ -476,10 +482,10 @@ public class DBproject{
 			query += num_appts; 
 			query += ")"; //need closing parenthases here
 
-			
-
-			int rowCount = esql.executeQuery(query);
-			System.out.println ("total row(s): " + rowCount);
+			//int rowCount = esql.executeQuery(query);
+			esql.executeUpdate(query);
+			System.out.println ("ADDED VALUES");
+			//System.out.println ("total row(s): " + rowCount);
 
 		}
 		catch(Exception e){
@@ -491,6 +497,8 @@ public class DBproject{
 		// For a doctor ID and a date range, find the list of active and available appointments of the doctor
 		//https://stackoverflow.com/questions/14208958/select-data-from-date-range-between-two-dates
 		//so after seeing this stack overflow website i am now thinking that dates are not strings which means some of my insert into statments would be wrong but should be an easy fix
+		//nvm they are strings HEHEH
+		//thesres this thing called to date but i dont wana use that 
 		try {
 			String query  = "select A.appnt_ID from Appointment A, Doctor D, has_appointment H where H.doctor_id = ";
 
@@ -503,13 +511,17 @@ public class DBproject{
 
 			System.out.print("\tEnter a left bound date in this format: month/day/year (3/10/2021 or 11/5/2020): ");
 			String dateStr = in.readLine();
+			query += "'";
 			query += dateStr;
+			query += "'";
 
 			query += " and A.adate < ";
 
 			System.out.print("\tEnter a right bound date in this format: month/day/year (3/10/2021 or 11/5/2020): ");
 			String dateStr2 = in.readLine();
+			query += "'";
 			query += dateStr2;
+			query += "' group by A.appnt_ID";
 
 			int rowCount = esql.executeQueryAndPrintResult(query);
 			System.out.println ("total row(s): " + rowCount);
@@ -555,7 +567,8 @@ public class DBproject{
 		//just lists the doctors in descedning order based on how many appointments they have with all types of appointments
 		try{
 			//this link for help:https://learnsql.com/cookbook/how-to-order-by-count-in-sql/#:~:text=The%20first%20step%20is%20to,IDs%20with%20COUNT(id)%20.
-			String query  = "select A.status, count(*) from Doctor D, Appointment A, has_appointment H where D.doctor_ID = H.doctor_id and H.appt_id = A.appnt_ID group by A.status order by count(*) desc";
+			//String query  = "select A.status, count(*) from Doctor D, Appointment A, has_appointment H where D.doctor_ID = H.doctor_id and H.appt_id = A.appnt_ID group by A.status order by count(*) desc";
+			String query  = "select D.name, A.status, count(*) from Doctor D, Appointment A, has_appointment H where D.doctor_ID = H.doctor_id and H.appt_id = A.appnt_ID group by D.name, A.status order by count(*) desc";
 			//may want count(A.status) here
 
 			//int rowCount = esql.executeQuery(query);
