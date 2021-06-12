@@ -500,7 +500,7 @@ public class DBproject{
 		//nvm they are strings HEHEH
 		//thesres this thing called to date but i dont wana use that 
 		try {
-			String query  = "select A.appnt_ID from Appointment A, Doctor D, has_appointment H where H.doctor_id = ";
+			String query  = "select A.adate, A.appnt_ID from Appointment A, Doctor D, has_appointment H where H.doctor_id = ";
 
 
 			System.out.print("\tEnter Doctor ID: ");
