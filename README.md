@@ -1,4 +1,5 @@
-# cs166_final_project
+# Hospital Database
+## Done in PostrgreSQL and Java for GUI
 
 ## Team member 1 - Trevor Gorman
 ## Team member 2 - Jonathan Picazo
